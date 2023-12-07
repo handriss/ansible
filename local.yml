@@ -1,0 +1,25 @@
+- hosts: localhost
+  vars:
+    source_key: "./.ssh/id_rsa"
+    dest_key: "{{ lookup('env', 'HOME') }}/.ssh/id_rsa"
+
+  pre_tasks:
+    - name: Check if Homebrew is installed
+      block:
+        - name: Check if Homebrew is installed
+          homebrew:
+            update_homebrew: true
+          check_mode: true
+        - name: Homebrew available
+          debug:
+            msg: Homebrew is installed
+      rescue:
+        - name: No homebrew
+          debug:
+            msg: Homebrew is not installed
+
+  tasks:
+    - name: Install ssh keys
+      ansible.builtin.import_tasks:
+        file: tasks/ssh.yml
+
