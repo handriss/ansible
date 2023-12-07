@@ -1,0 +1,17 @@
+- name: Ensure .ssh directory exists.
+  ansible.builtin.file:
+    dest: "{{ lookup('env', 'HOME') }}/.ssh"
+    mode: 0700
+    state: directory
+
+- name: Copy public key to .ssh folder
+  ansible.builtin.copy:
+    src: "../.ssh/id_rsa.pub"
+    dest: "{{ lookup('env', 'HOME') }}/.ssh/id_rsa.pub"
+    mode: 0700
+
+- name: Copy private key to .ssh folder
+  ansible.builtin.copy:
+    src: "../.ssh/id_rsa"
+    dest: "{{ lookup('env', 'HOME') }}/.ssh/id_rsa"
+    mode: 0700
