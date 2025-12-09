@@ -65,3 +65,7 @@
       ansible.builtin.import_tasks:
         file: tasks/devtools.yml
 
+    - name: Install apps
+      ansible.builtin.import_tasks:
+        file: tasks/apps.yml
+

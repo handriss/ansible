@@ -1,0 +1,19 @@
+- name: Install WebStorm
+  community.general.homebrew_cask:
+    name: webstorm
+    state: present
+
+- name: Install GoLand
+  community.general.homebrew_cask:
+    name: goland
+    state: present
+
+- name: Install DataGrip
+  community.general.homebrew_cask:
+    name: datagrip
+    state: present
+
+- name: Install Google Chrome
+  community.general.homebrew_cask:
+    name: google-chrome
+    state: present
