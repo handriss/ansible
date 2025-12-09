@@ -1,0 +1,10 @@
+- name: Install git
+  community.general.homebrew:
+    name: git
+    state: present
+
+- name: Copy .gitconfig
+  ansible.builtin.copy:
+    src: "../files/.gitconfig"
+    dest: "{{ lookup('env', 'HOME') }}/.gitconfig"
+    mode: '0644'

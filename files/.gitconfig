@@ -1,0 +1,11 @@
+[user]
+	name = handriss
+	email = andrashinkel@gmail.com
+[init]
+	defaultBranch = main
+[core]
+	autocrlf = input
+[url "git@github.com:"]
+  insteadOf = https://github.com/
+[coderabbit]
+	machineId = cli/724c379f41fa47ffa1995035e9cb22b5
