@@ -1,0 +1,21 @@
+- name: Install chruby
+  community.general.homebrew:
+    name: chruby
+    state: present
+
+- name: Install ruby-install
+  community.general.homebrew:
+    name: ruby-install
+    state: present
+
+- name: Install Ruby 3.3
+  ansible.builtin.shell: |
+    ruby-install --no-reinstall ruby 3.3
+  args:
+    executable: /bin/bash
+
+- name: Set Ruby 3.3 as default in .zshrc
+  ansible.builtin.lineinfile:
+    path: "{{ lookup('env', 'HOME') }}/.zshrc"
+    line: "chruby ruby-3.3"
+    state: present

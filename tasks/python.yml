@@ -1,0 +1,25 @@
+- name: Install pyenv
+  community.general.homebrew:
+    name: pyenv
+    state: present
+
+- name: Install Python 3.12
+  ansible.builtin.shell: |
+    eval "$(pyenv init -)"
+    pyenv install -s 3.12
+  args:
+    executable: /bin/bash
+
+- name: Install Python 3.13
+  ansible.builtin.shell: |
+    eval "$(pyenv init -)"
+    pyenv install -s 3.13
+  args:
+    executable: /bin/bash
+
+- name: Set Python 3.13 as global default
+  ansible.builtin.shell: |
+    eval "$(pyenv init -)"
+    pyenv global 3.13
+  args:
+    executable: /bin/bash

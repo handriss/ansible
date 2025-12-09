@@ -1,0 +1,42 @@
+- name: Install nvm
+  community.general.homebrew:
+    name: nvm
+    state: present
+
+- name: Ensure .nvm directory exists
+  ansible.builtin.file:
+    dest: "{{ lookup('env', 'HOME') }}/.nvm"
+    mode: '0755'
+    state: directory
+
+- name: Install Node.js 18 LTS
+  ansible.builtin.shell: |
+    export NVM_DIR="$HOME/.nvm"
+    [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && . "/opt/homebrew/opt/nvm/nvm.sh"
+    nvm install 18
+  args:
+    executable: /bin/bash
+
+- name: Install Node.js 20 LTS
+  ansible.builtin.shell: |
+    export NVM_DIR="$HOME/.nvm"
+    [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && . "/opt/homebrew/opt/nvm/nvm.sh"
+    nvm install 20
+  args:
+    executable: /bin/bash
+
+- name: Install Node.js 22 LTS
+  ansible.builtin.shell: |
+    export NVM_DIR="$HOME/.nvm"
+    [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && . "/opt/homebrew/opt/nvm/nvm.sh"
+    nvm install 22
+  args:
+    executable: /bin/bash
+
+- name: Set Node.js 22 as default
+  ansible.builtin.shell: |
+    export NVM_DIR="$HOME/.nvm"
+    [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && . "/opt/homebrew/opt/nvm/nvm.sh"
+    nvm alias default 22
+  args:
+    executable: /bin/bash
