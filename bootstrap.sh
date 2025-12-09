@@ -1,6 +1,16 @@
 #!/bin/bash
 set -e
 
+# Install Xcode Command Line Tools if not installed
+if ! xcode-select -p &> /dev/null; then
+    echo "Installing Xcode Command Line Tools..."
+    xcode-select --install
+    echo "Please complete the Xcode installation prompt, then re-run this script."
+    exit 0
+else
+    echo "Xcode Command Line Tools already installed"
+fi
+
 # Install Homebrew if not installed
 if ! command -v brew &> /dev/null; then
     echo "Installing Homebrew..."

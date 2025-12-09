@@ -1,7 +1,12 @@
 - hosts: localhost
   connection: local
-  gather_facts: false
+  gather_facts: true
   pre_tasks:
+    - name: Check if running on macOS
+      ansible.builtin.fail:
+        msg: "This playbook only runs on macOS. Detected OS: {{ ansible_os_family }}"
+      when: ansible_os_family != "Darwin"
+
     - name: Check if Homebrew is installed
       block:
         - name: Check if Homebrew is installed
