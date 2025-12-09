@@ -1,0 +1,16 @@
+[default]
+region = us-east-1
+output = json
+[profile conceal-dev]
+region = us-east-1
+output = json
+[profile dev]
+sso_session = dev
+sso_account_id = 520126061012
+sso_role_name = AdministratorAccess
+region = us-east-1
+output = json
+[sso-session dev]
+sso_start_url = https://d-9067bce79d.awsapps.com/start/
+sso_region = us-east-1
+sso_registration_scopes = sso:account:access

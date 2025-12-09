@@ -57,3 +57,11 @@
       ansible.builtin.import_tasks:
         file: tasks/neovim.yml
 
+    - name: Setup Docker
+      ansible.builtin.import_tasks:
+        file: tasks/docker.yml
+
+    - name: Setup dev tools
+      ansible.builtin.import_tasks:
+        file: tasks/devtools.yml
+
