@@ -1,0 +1,33 @@
+- name: Install yabai
+  community.general.homebrew:
+    name: yabai
+    state: present
+
+- name: Install skhd
+  community.general.homebrew:
+    name: skhd
+    state: present
+
+- name: Ensure .config/yabai directory exists
+  ansible.builtin.file:
+    dest: "{{ lookup('env', 'HOME') }}/.config/yabai"
+    mode: '0755'
+    state: directory
+
+- name: Ensure .config/skhd directory exists
+  ansible.builtin.file:
+    dest: "{{ lookup('env', 'HOME') }}/.config/skhd"
+    mode: '0755'
+    state: directory
+
+- name: Copy yabairc
+  ansible.builtin.copy:
+    src: "../files/yabairc"
+    dest: "{{ lookup('env', 'HOME') }}/.config/yabai/yabairc"
+    mode: '0755'
+
+- name: Copy skhdrc
+  ansible.builtin.copy:
+    src: "../files/skhdrc"
+    dest: "{{ lookup('env', 'HOME') }}/.config/skhd/skhdrc"
+    mode: '0644'

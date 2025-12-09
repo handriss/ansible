@@ -29,3 +29,11 @@
       ansible.builtin.import_tasks:
         file: tasks/tmux.yml
 
+    - name: Setup git
+      ansible.builtin.import_tasks:
+        file: tasks/git.yml
+
+    - name: Setup yabai and skhd
+      ansible.builtin.import_tasks:
+        file: tasks/yabai.yml
+
