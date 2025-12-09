@@ -1,0 +1,16 @@
+- name: Install neovim
+  community.general.homebrew:
+    name: neovim
+    state: present
+
+- name: Ensure .config/nvim directory exists
+  ansible.builtin.file:
+    dest: "{{ lookup('env', 'HOME') }}/.config/nvim"
+    mode: '0755'
+    state: directory
+
+- name: Copy init.lua
+  ansible.builtin.copy:
+    src: "../files/nvim/init.lua"
+    dest: "{{ lookup('env', 'HOME') }}/.config/nvim/init.lua"
+    mode: '0644'
