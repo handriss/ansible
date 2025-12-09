@@ -1,0 +1,37 @@
+- name: Install Claude Code
+  community.general.homebrew_cask:
+    name: claude-code
+    state: present
+
+- name: Install Terraform
+  community.general.homebrew:
+    name: terraform
+    state: present
+
+- name: Install AWS CLI
+  community.general.homebrew:
+    name: awscli
+    state: present
+
+- name: Ensure .aws directory exists
+  ansible.builtin.file:
+    dest: "{{ lookup('env', 'HOME') }}/.aws"
+    mode: '0700'
+    state: directory
+
+- name: Copy AWS config
+  ansible.builtin.copy:
+    src: "../files/aws/config"
+    dest: "{{ lookup('env', 'HOME') }}/.aws/config"
+    mode: '0600'
+
+- name: Copy AWS credentials
+  ansible.builtin.copy:
+    src: "../.aws/credentials"
+    dest: "{{ lookup('env', 'HOME') }}/.aws/credentials"
+    mode: '0600'
+
+- name: Install Google Cloud SDK
+  community.general.homebrew_cask:
+    name: google-cloud-sdk
+    state: present
