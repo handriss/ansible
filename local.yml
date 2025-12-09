@@ -21,3 +21,7 @@
       ansible.builtin.import_tasks:
         file: tasks/ssh.yml
 
+    - name: Setup terminal and shell
+      ansible.builtin.import_tasks:
+        file: tasks/terminal.yml
+
