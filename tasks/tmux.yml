@@ -1,0 +1,22 @@
+- name: Install tmux
+  community.general.homebrew:
+    name: tmux
+    state: present
+
+- name: Ensure .config/tmux directory exists
+  ansible.builtin.file:
+    dest: "{{ lookup('env', 'HOME') }}/.config/tmux"
+    mode: '0755'
+    state: directory
+
+- name: Copy tmux.conf
+  ansible.builtin.copy:
+    src: "../files/tmux.conf"
+    dest: "{{ lookup('env', 'HOME') }}/.config/tmux/tmux.conf"
+    mode: '0700'
+
+- name: Clone TPM (Tmux Plugin Manager)
+  ansible.builtin.git:
+    repo: https://github.com/tmux-plugins/tpm
+    dest: "{{ lookup('env', 'HOME') }}/.tmux/plugins/tpm"
+    depth: 1
