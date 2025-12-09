@@ -1,4 +1,6 @@
 - hosts: localhost
+  connection: local
+  gather_facts: false
   pre_tasks:
     - name: Check if Homebrew is installed
       block:
