@@ -37,3 +37,19 @@
       ansible.builtin.import_tasks:
         file: tasks/yabai.yml
 
+    - name: Setup nvm and Node.js
+      ansible.builtin.import_tasks:
+        file: tasks/nvm.yml
+
+    - name: Setup pyenv and Python
+      ansible.builtin.import_tasks:
+        file: tasks/python.yml
+
+    - name: Setup Go
+      ansible.builtin.import_tasks:
+        file: tasks/go.yml
+
+    - name: Setup Ruby
+      ansible.builtin.import_tasks:
+        file: tasks/ruby.yml
+

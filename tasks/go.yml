@@ -1,0 +1,10 @@
+- name: Install Go
+  community.general.homebrew:
+    name: go
+    state: present
+
+- name: Ensure go directory exists
+  ansible.builtin.file:
+    dest: "{{ lookup('env', 'HOME') }}/go/bin"
+    mode: '0755'
+    state: directory
