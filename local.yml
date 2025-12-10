@@ -30,10 +30,6 @@
       ansible.builtin.import_tasks:
         file: tasks/terminal.yml
 
-    - name: Setup tmux
-      ansible.builtin.import_tasks:
-        file: tasks/tmux.yml
-
     - name: Setup git
       ansible.builtin.import_tasks:
         file: tasks/git.yml
