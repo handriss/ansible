@@ -19,7 +19,6 @@ ansible-playbook local.yml --ask-vault-pass
 ### Terminal & Shell
 - Zsh with Powerlevel10k theme
 - Meslo Nerd Font
-- tmux with Catppuccin theme and plugins (TPM, resurrect, continuum)
 
 ### Development Tools
 - neovim
@@ -61,7 +60,6 @@ ansible-playbook local.yml --ask-vault-pass
 │   ├── .zshrc
 │   ├── .p10k.zsh
 │   ├── .gitconfig
-│   ├── tmux.conf
 │   ├── yabairc
 │   ├── skhdrc
 │   └── aws/
@@ -70,7 +68,6 @@ ansible-playbook local.yml --ask-vault-pass
 └── tasks/
     ├── ssh.yml
     ├── terminal.yml
-    ├── tmux.yml
     ├── git.yml
     ├── yabai.yml
     ├── nvm.yml
