@@ -50,10 +50,6 @@
       ansible.builtin.import_tasks:
         file: tasks/go.yml
 
-    - name: Setup Ruby
-      ansible.builtin.import_tasks:
-        file: tasks/ruby.yml
-
     - name: Setup neovim
       ansible.builtin.import_tasks:
         file: tasks/neovim.yml
