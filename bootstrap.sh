@@ -32,4 +32,11 @@ else
     echo "Ansible already installed"
 fi
 
+# Install community.general collection for homebrew modules
+if ! ansible-galaxy collection list community.general &> /dev/null; then
+    echo "Installing Ansible community.general collection..."
+    ansible-galaxy collection install community.general
+fi
+
 echo "Prerequisites installed successfully!"
+echo "Run the playbook with: ansible-playbook local.yml --ask-vault-pass"
