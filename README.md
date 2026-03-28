@@ -31,10 +31,8 @@ ansible-playbook local.yml --ask-vault-pass
 - Node.js (18, 20, 22 LTS via nvm)
 - Python (3.12, 3.13 via pyenv)
 - Go
-- Ruby (3.3 via chruby)
 
 ### Cloud CLIs
-- AWS CLI
 - Google Cloud SDK
 
 ### Window Management
@@ -45,7 +43,6 @@ ansible-playbook local.yml --ask-vault-pass
 - WebStorm
 - GoLand
 - DataGrip
-- PyCharm
 - Google Chrome
 
 ## Project Structure
@@ -60,11 +57,10 @@ ansible-playbook local.yml --ask-vault-pass
 │   ├── .zshrc
 │   ├── .p10k.zsh
 │   ├── .gitconfig
+│   ├── nvim/
 │   ├── yabairc
-│   ├── skhdrc
-│   └── aws/
+│   └── skhdrc
 ├── .ssh/               # SSH keys (vault-encrypted)
-├── .aws/               # AWS credentials (vault-encrypted)
 └── tasks/
     ├── ssh.yml
     ├── terminal.yml
@@ -73,7 +69,6 @@ ansible-playbook local.yml --ask-vault-pass
     ├── nvm.yml
     ├── python.yml
     ├── go.yml
-    ├── ruby.yml
     ├── neovim.yml
     ├── docker.yml
     ├── devtools.yml
@@ -84,7 +79,6 @@ ansible-playbook local.yml --ask-vault-pass
 
 Sensitive files are encrypted with Ansible Vault:
 - `.ssh/id_rsa` - SSH private key
-- `.aws/credentials` - AWS credentials
 
 To edit encrypted files:
 ```bash
