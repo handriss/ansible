@@ -8,10 +8,10 @@
   ansible.builtin.copy:
     src: "../.ssh/id_rsa.pub"
     dest: "{{ lookup('env', 'HOME') }}/.ssh/id_rsa.pub"
-    mode: 0700
+    mode: '0644'
 
 - name: Copy private key to .ssh folder
   ansible.builtin.copy:
     src: "../.ssh/id_rsa"
     dest: "{{ lookup('env', 'HOME') }}/.ssh/id_rsa"
-    mode: 0700
+    mode: '0600'
