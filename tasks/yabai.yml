@@ -20,6 +20,14 @@
     mode: '0755'
     state: directory
 
+- name: Prefer tabs over new windows (prevents yabai from tiling new tabs)
+  community.general.osx_defaults:
+    domain: NSGlobalDomain
+    key: AppleWindowTabbingMode
+    type: string
+    value: always
+    state: present
+
 - name: Copy yabairc
   ansible.builtin.copy:
     src: "../files/yabairc"

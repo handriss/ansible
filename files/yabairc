@@ -14,5 +14,6 @@ yabai -m rule --add app="^System Settings$" manage=off
 # show window shadods only for floating windows
 yabai -m config window_shadow float
 
-# automatically update yabai when service is started
-brew install yabai --HEAD
+# rebalance space when a window is destroyed (fixes Terminal.app tabs causing half-screen splits)
+yabai -m signal --add event=window_destroyed active=yes action="yabai -m space --balance"
+
