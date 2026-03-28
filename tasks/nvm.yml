@@ -16,6 +16,7 @@
     nvm install 18
   args:
     executable: /bin/bash
+    creates: "{{ lookup('env', 'HOME') }}/.nvm/versions/node/v18*"
 
 - name: Install Node.js 20 LTS
   ansible.builtin.shell: |
@@ -24,6 +25,7 @@
     nvm install 20
   args:
     executable: /bin/bash
+    creates: "{{ lookup('env', 'HOME') }}/.nvm/versions/node/v20*"
 
 - name: Install Node.js 22 LTS
   ansible.builtin.shell: |
@@ -32,6 +34,7 @@
     nvm install 22
   args:
     executable: /bin/bash
+    creates: "{{ lookup('env', 'HOME') }}/.nvm/versions/node/v22*"
 
 - name: Set Node.js 22 as default
   ansible.builtin.shell: |
