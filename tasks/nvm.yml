@@ -40,6 +40,10 @@
   ansible.builtin.shell: |
     export NVM_DIR="$HOME/.nvm"
     [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && . "/opt/homebrew/opt/nvm/nvm.sh"
-    nvm alias default 22
+    current=$(nvm alias default 2>/dev/null | grep -o 'v[0-9]*' | head -1)
+    if [ "$current" != "v22" ]; then
+      nvm alias default 22
+    fi
   args:
     executable: /bin/bash
+  changed_when: false

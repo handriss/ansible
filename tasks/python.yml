@@ -22,6 +22,10 @@
 - name: Set Python 3.13 as global default
   ansible.builtin.shell: |
     eval "$(pyenv init -)"
-    pyenv global 3.13
+    current=$(pyenv global 2>/dev/null)
+    if [ "$current" != "3.13" ]; then
+      pyenv global 3.13
+    fi
   args:
     executable: /bin/bash
+  changed_when: false
