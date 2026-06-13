@@ -1,0 +1,92 @@
+- name: Prefer tabs over new windows (prevents yabai from tiling new tabs)
+  community.general.osx_defaults:
+    domain: NSGlobalDomain
+    key: AppleWindowTabbingMode
+    type: string
+    value: always
+    state: present
+
+- name: Show all file extensions in Finder
+  community.general.osx_defaults:
+    domain: NSGlobalDomain
+    key: AppleShowAllExtensions
+    type: bool
+    value: true
+
+- name: Faster key repeat
+  community.general.osx_defaults:
+    domain: NSGlobalDomain
+    key: KeyRepeat
+    type: int
+    value: 2
+
+- name: Shorter delay until key repeat starts
+  community.general.osx_defaults:
+    domain: NSGlobalDomain
+    key: InitialKeyRepeat
+    type: int
+    value: 15
+
+- name: Autohide Dock
+  community.general.osx_defaults:
+    domain: com.apple.dock
+    key: autohide
+    type: bool
+    value: true
+
+- name: Don't show recent apps in Dock
+  community.general.osx_defaults:
+    domain: com.apple.dock
+    key: show-recents
+    type: bool
+    value: false
+
+- name: Show status bar in Finder
+  community.general.osx_defaults:
+    domain: com.apple.finder
+    key: ShowStatusBar
+    type: bool
+    value: true
+
+- name: Show path bar in Finder
+  community.general.osx_defaults:
+    domain: com.apple.finder
+    key: ShowPathbar
+    type: bool
+    value: true
+
+- name: Disable .DS_Store on network volumes
+  community.general.osx_defaults:
+    domain: com.apple.desktopservices
+    key: DSDontWriteNetworkStores
+    type: bool
+    value: true
+
+- name: Disable .DS_Store on USB volumes
+  community.general.osx_defaults:
+    domain: com.apple.desktopservices
+    key: DSDontWriteUSBStores
+    type: bool
+    value: true
+
+- name: Ensure ~/Screenshots directory exists
+  ansible.builtin.file:
+    dest: "{{ lookup('env', 'HOME') }}/Screenshots"
+    mode: '0755'
+    state: directory
+
+- name: Save screenshots to ~/Screenshots
+  community.general.osx_defaults:
+    domain: com.apple.screencapture
+    key: location
+    type: string
+    value: "{{ lookup('env', 'HOME') }}/Screenshots"
+
+- name: Reload Dock, Finder, SystemUIServer to apply changes
+  ansible.builtin.command: "killall {{ item }}"
+  loop:
+    - Dock
+    - Finder
+    - SystemUIServer
+  changed_when: false
+  failed_when: false

@@ -1,8 +1,3 @@
-- name: Install git
-  community.general.homebrew:
-    name: git
-    state: present
-
 - name: Copy .gitconfig
   ansible.builtin.copy:
     src: "../files/.gitconfig"
