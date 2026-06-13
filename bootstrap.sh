@@ -16,9 +16,11 @@ if ! command -v brew &> /dev/null; then
     echo "Installing Homebrew..."
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
-    # Add Homebrew to PATH for Apple Silicon Macs
+    # Add Homebrew to PATH (different prefix on Apple Silicon vs Intel)
     if [[ $(uname -m) == "arm64" ]]; then
         eval "$(/opt/homebrew/bin/brew shellenv)"
+    else
+        eval "$(/usr/local/bin/brew shellenv)"
     fi
 else
     echo "Homebrew already installed"
@@ -36,6 +38,16 @@ fi
 if ! ansible-galaxy collection list community.general &> /dev/null; then
     echo "Installing Ansible community.general collection..."
     ansible-galaxy collection install community.general
+fi
+
+# Enable Touch ID for sudo so brew bundle's cask installers don't hang on the
+# non-TTY password prompt. Done here (not in the playbook) because the playbook
+# can't trigger Touch ID itself — Ansible's become invokes sudo with -n.
+if [ ! -f /etc/pam.d/sudo_local ]; then
+    echo "Enabling Touch ID for sudo..."
+    echo 'auth       sufficient     pam_tid.so' | sudo tee /etc/pam.d/sudo_local > /dev/null
+else
+    echo "Touch ID for sudo already enabled"
 fi
 
 echo "Prerequisites installed successfully!"

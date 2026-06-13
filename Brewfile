@@ -29,16 +29,18 @@ brew "koekeishiya/formulae/skhd"
 brew "koekeishiya/formulae/yabai"
 
 # Apps and fonts
-cask "anki"
-cask "claude"
-cask "claude-code"
-cask "datagrip"
-cask "docker"
+# `args: { adopt: true }` makes brew claim an existing manual install at the
+# destination instead of failing. No effect on fresh installs.
+cask "anki", args: { adopt: true }
+cask "claude", args: { adopt: true }
+cask "claude-code", args: { adopt: true }
+cask "datagrip", args: { adopt: true }
+cask "docker-desktop", args: { adopt: true }
 cask "font-meslo-lg-nerd-font"
-cask "gcloud-cli"
-cask "goland"
-cask "google-chrome"
-cask "karabiner-elements"
-cask "tailscale"
-cask "telegram"
-cask "vlc"
+cask "gcloud-cli", args: { adopt: true }
+cask "goland", args: { adopt: true }
+cask "google-chrome", args: { adopt: true }
+cask "karabiner-elements", args: { adopt: true }
+cask "tailscale-app", args: { adopt: true }
+cask "telegram", args: { adopt: true }
+cask "vlc", args: { adopt: true }
