@@ -21,3 +21,25 @@
     src: "../files/skhdrc"
     dest: "{{ lookup('env', 'HOME') }}/.config/skhd/skhdrc"
     mode: '0644'
+
+- name: Install yabai launchd service
+  ansible.builtin.command: yabai --install-service
+  register: yabai_install_svc
+  changed_when: yabai_install_svc.rc == 0
+  failed_when: yabai_install_svc.rc != 0 and 'already exists' not in (yabai_install_svc.stderr | default(''))
+
+- name: Install skhd launchd service
+  ansible.builtin.command: skhd --install-service
+  register: skhd_install_svc
+  changed_when: skhd_install_svc.rc == 0
+  failed_when: skhd_install_svc.rc != 0 and 'already exists' not in (skhd_install_svc.stderr | default(''))
+
+- name: Start yabai service
+  ansible.builtin.command: yabai --start-service
+  changed_when: false
+  failed_when: false
+
+- name: Start skhd service
+  ansible.builtin.command: skhd --start-service
+  changed_when: false
+  failed_when: false
