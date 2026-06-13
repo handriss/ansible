@@ -3,13 +3,21 @@
     name: claude-code
     state: present
 
-- name: Install Terraform
-  community.general.homebrew:
-    name: terraform
+- name: Tap hashicorp/tap
+  community.general.homebrew_tap:
+    name: hashicorp/tap
     state: present
 
+- name: Trust hashicorp/tap (required when HOMEBREW_REQUIRE_TAP_TRUST is set)
+  ansible.builtin.command: brew trust hashicorp/tap
+  changed_when: false
 
-- name: Install Google Cloud SDK
+- name: Install Terraform
+  community.general.homebrew:
+    name: hashicorp/tap/terraform
+    state: present
+
+- name: Install Google Cloud CLI
   community.general.homebrew_cask:
-    name: google-cloud-sdk
+    name: gcloud-cli
     state: present
