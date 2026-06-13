@@ -11,21 +11,17 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-export PATH=”/opt/homebrew/bin/python3:${PATH}”
-alias python=”python3”
-alias 3=”python3”
-alias py=”python3”
-export PATH=”/opt/homebrew/sbin:$PATH”
+alias python="python3"
+alias 3="python3"
+alias py="python3"
+export PATH="/opt/homebrew/sbin:$PATH"
 source /opt/homebrew/share/powerlevel10k/powerlevel10k.zsh-theme
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-# tabtab source for electron-forge package
-# uninstall by removing these lines or running `tabtab uninstall electron-forge`
-[[ -f /Users/andris/.npm/_npx/6913fdfd1ea7a741/node_modules/tabtab/.completions/electron-forge.zsh ]] && . /Users/andris/.npm/_npx/6913fdfd1ea7a741/node_modules/tabtab/.completions/electron-forge.zsh
 # bun completions
-[ -s "/Users/andris/.bun/_bun" ] && source "/Users/andris/.bun/_bun"
+[ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
 
 # bun
 export BUN_INSTALL="$HOME/.bun"
@@ -34,4 +30,4 @@ export PATH="$BUN_INSTALL/bin:$PATH"
 export PATH=$PATH:$HOME/go/bin
 
 # Added by CodeRabbit CLI installer
-export PATH="/Users/andris/.local/bin:$PATH"
+export PATH="$HOME/.local/bin:$PATH"
