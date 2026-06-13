@@ -38,6 +38,10 @@
       ansible.builtin.import_tasks:
         file: tasks/yabai.yml
 
+    - name: Setup Karabiner-Elements
+      ansible.builtin.import_tasks:
+        file: tasks/karabiner.yml
+
     - name: Setup nvm and Node.js
       ansible.builtin.import_tasks:
         file: tasks/nvm.yml
@@ -50,6 +54,10 @@
       ansible.builtin.import_tasks:
         file: tasks/go.yml
 
+    - name: Setup Bun
+      ansible.builtin.import_tasks:
+        file: tasks/bun.yml
+
     - name: Setup neovim
       ansible.builtin.import_tasks:
         file: tasks/neovim.yml
@@ -58,11 +66,43 @@
       ansible.builtin.import_tasks:
         file: tasks/docker.yml
 
+    - name: Setup tmux
+      ansible.builtin.import_tasks:
+        file: tasks/tmux.yml
+
     - name: Setup dev tools
       ansible.builtin.import_tasks:
         file: tasks/devtools.yml
+
+    - name: Setup CodeRabbit CLI
+      ansible.builtin.import_tasks:
+        file: tasks/coderabbit.yml
+
+    - name: Install CLI tools
+      ansible.builtin.import_tasks:
+        file: tasks/cli.yml
 
     - name: Install apps
       ansible.builtin.import_tasks:
         file: tasks/apps.yml
 
+  post_tasks:
+    - name: Manual installation reminder
+      ansible.builtin.debug:
+        msg:
+          - "============================================================"
+          - ""
+          - "  Playbook finished. A few things must be installed manually:"
+          - ""
+          - "  1. Xcode  -  open the App Store and search 'Xcode',"
+          - "               or use this direct link:"
+          - "               https://apps.apple.com/app/xcode/id497799835"
+          - ""
+          - "     After install, accept the license and install CLT:"
+          - "       sudo xcodebuild -license accept"
+          - "       xcode-select --install"
+          - ""
+          - "  2. Sign in to apps that need accounts:"
+          - "     Tailscale, Claude, Telegram, Anki, Karabiner"
+          - ""
+          - "============================================================"
