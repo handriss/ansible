@@ -8,12 +8,10 @@ yabai -m config auto_balance on
 # when window is dropped in center of another window, swap them (on edges it will split it)
 yabai -m mouse_drop_action swap
 
-# Prevent settings from being managed by yabai
+# Prevent specific apps from being managed by yabai
 yabai -m rule --add app="^System Settings$" manage=off
+yabai -m rule --add app="^Terminal$" manage=off
 
-# show window shadods only for floating windows
+# show window shadows only for floating windows
 yabai -m config window_shadow float
-
-# rebalance space when a window is destroyed (fixes Terminal.app tabs causing half-screen splits)
-yabai -m signal --add event=window_destroyed active=yes action="yabai -m space --balance"
 
