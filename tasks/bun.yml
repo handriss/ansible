@@ -1,4 +1,0 @@
-- name: Install Bun
-  community.general.homebrew:
-    name: bun
-    state: present

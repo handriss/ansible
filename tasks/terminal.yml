@@ -1,13 +1,3 @@
-- name: Install Powerlevel10k
-  community.general.homebrew:
-    name: powerlevel10k
-    state: present
-
-- name: Install Meslo Nerd Font
-  community.general.homebrew_cask:
-    name: font-meslo-lg-nerd-font
-    state: present
-
 - name: Copy .zshrc
   ansible.builtin.copy:
     src: "../files/.zshrc"

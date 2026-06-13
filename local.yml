@@ -25,66 +25,67 @@
     - name: Install ssh keys
       ansible.builtin.import_tasks:
         file: tasks/ssh.yml
+      tags: [ssh]
+
+    - name: Install everything from Brewfile
+      ansible.builtin.import_tasks:
+        file: tasks/brewfile.yml
+      tags: [brew]
+
+    - name: Apply macOS system defaults
+      ansible.builtin.import_tasks:
+        file: tasks/macos.yml
+      tags: [defaults, macos]
 
     - name: Setup terminal and shell
       ansible.builtin.import_tasks:
         file: tasks/terminal.yml
+      tags: [config, terminal]
 
     - name: Setup git
       ansible.builtin.import_tasks:
         file: tasks/git.yml
+      tags: [config, git]
 
     - name: Setup yabai and skhd
       ansible.builtin.import_tasks:
         file: tasks/yabai.yml
+      tags: [config, services, yabai]
 
     - name: Setup Karabiner-Elements
       ansible.builtin.import_tasks:
         file: tasks/karabiner.yml
-
-    - name: Setup nvm and Node.js
-      ansible.builtin.import_tasks:
-        file: tasks/nvm.yml
-
-    - name: Setup pyenv and Python
-      ansible.builtin.import_tasks:
-        file: tasks/python.yml
-
-    - name: Setup Go
-      ansible.builtin.import_tasks:
-        file: tasks/go.yml
-
-    - name: Setup Bun
-      ansible.builtin.import_tasks:
-        file: tasks/bun.yml
+      tags: [config, karabiner]
 
     - name: Setup neovim
       ansible.builtin.import_tasks:
         file: tasks/neovim.yml
-
-    - name: Setup Docker
-      ansible.builtin.import_tasks:
-        file: tasks/docker.yml
+      tags: [config, neovim]
 
     - name: Setup tmux
       ansible.builtin.import_tasks:
         file: tasks/tmux.yml
+      tags: [config, tmux]
 
-    - name: Setup dev tools
+    - name: Setup nvm and Node.js versions
       ansible.builtin.import_tasks:
-        file: tasks/devtools.yml
+        file: tasks/nvm.yml
+      tags: [langs, nvm, node]
+
+    - name: Setup pyenv and Python versions
+      ansible.builtin.import_tasks:
+        file: tasks/python.yml
+      tags: [langs, python, pyenv]
+
+    - name: Setup Go workspace
+      ansible.builtin.import_tasks:
+        file: tasks/go.yml
+      tags: [langs, go]
 
     - name: Setup CodeRabbit CLI
       ansible.builtin.import_tasks:
         file: tasks/coderabbit.yml
-
-    - name: Install CLI tools
-      ansible.builtin.import_tasks:
-        file: tasks/cli.yml
-
-    - name: Install apps
-      ansible.builtin.import_tasks:
-        file: tasks/apps.yml
+      tags: [coderabbit]
 
   post_tasks:
     - name: Manual installation reminder
@@ -105,4 +106,9 @@
           - "  2. Sign in to apps that need accounts:"
           - "     Tailscale, Claude, Telegram, Anki, Karabiner"
           - ""
+          - "  3. Grant Accessibility + Input Monitoring permissions to"
+          - "     yabai, skhd, and Karabiner-Elements when macOS prompts"
+          - "     (System Settings -> Privacy & Security)"
+          - ""
           - "============================================================"
+      tags: [always]

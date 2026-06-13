@@ -1,22 +1,3 @@
-- name: Tap koekeishiya/formulae
-  community.general.homebrew_tap:
-    name: koekeishiya/formulae
-    state: present
-
-- name: Trust koekeishiya/formulae tap (required when HOMEBREW_REQUIRE_TAP_TRUST is set)
-  ansible.builtin.command: brew trust koekeishiya/formulae
-  changed_when: false
-
-- name: Install yabai
-  community.general.homebrew:
-    name: koekeishiya/formulae/yabai
-    state: present
-
-- name: Install skhd
-  community.general.homebrew:
-    name: koekeishiya/formulae/skhd
-    state: present
-
 - name: Ensure .config/yabai directory exists
   ansible.builtin.file:
     dest: "{{ lookup('env', 'HOME') }}/.config/yabai"
@@ -28,14 +9,6 @@
     dest: "{{ lookup('env', 'HOME') }}/.config/skhd"
     mode: '0755'
     state: directory
-
-- name: Prefer tabs over new windows (prevents yabai from tiling new tabs)
-  community.general.osx_defaults:
-    domain: NSGlobalDomain
-    key: AppleWindowTabbingMode
-    type: string
-    value: always
-    state: present
 
 - name: Copy yabairc
   ansible.builtin.copy:
