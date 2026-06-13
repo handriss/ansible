@@ -1,0 +1,88 @@
+{
+    "profiles": [
+        {
+            "name": "Default profile",
+            "selected": true,
+            "virtual_hid_keyboard": { "keyboard_type_v2": "iso" },
+            "complex_modifications": {
+                "rules": [
+                    {
+                        "description": "Double-tap Right Cmd → open Telegram capture bot (single press still acts as ⌘)",
+                        "manipulators": [
+                            {
+                                "type": "basic",
+                                "parameters": {
+                                    "basic.to_delayed_action_delay_milliseconds": 300
+                                },
+                                "from": {
+                                    "key_code": "right_command",
+                                    "modifiers": { "optional": ["any"] }
+                                },
+                                "to": [
+                                    { "key_code": "right_command" }
+                                ],
+                                "to_if_alone": [
+                                    {
+                                        "shell_command": "open 'tg://resolve?domain=SecondBrainCaptureBot'"
+                                    },
+                                    {
+                                        "set_variable": {
+                                            "name": "right_command_tapped_once",
+                                            "value": 0
+                                        }
+                                    }
+                                ],
+                                "conditions": [
+                                    {
+                                        "type": "variable_if",
+                                        "name": "right_command_tapped_once",
+                                        "value": 1
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "basic",
+                                "parameters": {
+                                    "basic.to_delayed_action_delay_milliseconds": 300
+                                },
+                                "from": {
+                                    "key_code": "right_command",
+                                    "modifiers": { "optional": ["any"] }
+                                },
+                                "to": [
+                                    { "key_code": "right_command" }
+                                ],
+                                "to_if_alone": [
+                                    {
+                                        "set_variable": {
+                                            "name": "right_command_tapped_once",
+                                            "value": 1
+                                        }
+                                    }
+                                ],
+                                "to_delayed_action": {
+                                    "to_if_invoked": [
+                                        {
+                                            "set_variable": {
+                                                "name": "right_command_tapped_once",
+                                                "value": 0
+                                            }
+                                        }
+                                    ],
+                                    "to_if_canceled": [
+                                        {
+                                            "set_variable": {
+                                                "name": "right_command_tapped_once",
+                                                "value": 0
+                                            }
+                                        }
+                                    ]
+                                }
+                            }
+                        ]
+                    }
+                ]
+            }
+        }
+    ]
+}
