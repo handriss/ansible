@@ -1,11 +1,20 @@
+- name: Tap koekeishiya/formulae
+  community.general.homebrew_tap:
+    name: koekeishiya/formulae
+    state: present
+
+- name: Trust koekeishiya/formulae tap (required when HOMEBREW_REQUIRE_TAP_TRUST is set)
+  ansible.builtin.command: brew trust koekeishiya/formulae
+  changed_when: false
+
 - name: Install yabai
   community.general.homebrew:
-    name: yabai
+    name: koekeishiya/formulae/yabai
     state: present
 
 - name: Install skhd
   community.general.homebrew:
-    name: skhd
+    name: koekeishiya/formulae/skhd
     state: present
 
 - name: Ensure .config/yabai directory exists

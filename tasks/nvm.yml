@@ -9,24 +9,6 @@
     mode: '0755'
     state: directory
 
-- name: Install Node.js 18 LTS
-  ansible.builtin.shell: |
-    export NVM_DIR="$HOME/.nvm"
-    [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && . "/opt/homebrew/opt/nvm/nvm.sh"
-    nvm install 18
-  args:
-    executable: /bin/bash
-    creates: "{{ lookup('env', 'HOME') }}/.nvm/versions/node/v18*"
-
-- name: Install Node.js 20 LTS
-  ansible.builtin.shell: |
-    export NVM_DIR="$HOME/.nvm"
-    [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && . "/opt/homebrew/opt/nvm/nvm.sh"
-    nvm install 20
-  args:
-    executable: /bin/bash
-    creates: "{{ lookup('env', 'HOME') }}/.nvm/versions/node/v20*"
-
 - name: Install Node.js 22 LTS
   ansible.builtin.shell: |
     export NVM_DIR="$HOME/.nvm"
@@ -36,13 +18,22 @@
     executable: /bin/bash
     creates: "{{ lookup('env', 'HOME') }}/.nvm/versions/node/v22*"
 
-- name: Set Node.js 22 as default
+- name: Install Node.js 24
+  ansible.builtin.shell: |
+    export NVM_DIR="$HOME/.nvm"
+    [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && . "/opt/homebrew/opt/nvm/nvm.sh"
+    nvm install 24
+  args:
+    executable: /bin/bash
+    creates: "{{ lookup('env', 'HOME') }}/.nvm/versions/node/v24*"
+
+- name: Set Node.js 24 as default
   ansible.builtin.shell: |
     export NVM_DIR="$HOME/.nvm"
     [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && . "/opt/homebrew/opt/nvm/nvm.sh"
     current=$(nvm alias default 2>/dev/null | grep -o 'v[0-9]*' | head -1)
-    if [ "$current" != "v22" ]; then
-      nvm alias default 22
+    if [ "$current" != "v24" ]; then
+      nvm alias default 24
     fi
   args:
     executable: /bin/bash
