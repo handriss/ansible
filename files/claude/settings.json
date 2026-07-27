@@ -1,0 +1,11 @@
+{
+  "model": "claude-fable-5",
+  "enabledPlugins": {
+    "swift-lsp@claude-plugins-official": true
+  },
+  "tui": "fullscreen",
+  "skipDangerousModePermissionPrompt": true,
+  "remoteControlAtStartup": false,
+  "agentPushNotifEnabled": true,
+  "voiceEnabled": true
+}

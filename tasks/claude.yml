@@ -1,0 +1,19 @@
+# Claude Code global config. Deliberately excluded: ~/.claude.json (OAuth
+# tokens), history, projects, todos.
+- name: Ensure .claude directory exists
+  ansible.builtin.file:
+    dest: "{{ lookup('env', 'HOME') }}/.claude"
+    mode: '0755'
+    state: directory
+
+- name: Copy Claude global CLAUDE.md
+  ansible.builtin.copy:
+    src: "../files/claude/CLAUDE.md"
+    dest: "{{ lookup('env', 'HOME') }}/.claude/CLAUDE.md"
+    mode: '0644'
+
+- name: Copy Claude settings
+  ansible.builtin.copy:
+    src: "../files/claude/settings.json"
+    dest: "{{ lookup('env', 'HOME') }}/.claude/settings.json"
+    mode: '0644'
