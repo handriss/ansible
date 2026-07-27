@@ -1,6 +1,17 @@
+# yabai comes from the asmvik fork tap, not homebrew core.
+- name: Tap asmvik/formulae
+  community.general.homebrew_tap:
+    name: asmvik/formulae
+
+- name: Trust asmvik tap
+  ansible.builtin.shell: brew trust asmvik/formulae
+  args:
+    executable: /bin/bash
+  changed_when: false
+
 - name: Install yabai
   community.general.homebrew:
-    name: yabai
+    name: asmvik/formulae/yabai
     state: present
 
 - name: Install skhd
