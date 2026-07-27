@@ -1,0 +1,41 @@
+- name: Install tmux
+  community.general.homebrew:
+    name: tmux
+    state: present
+
+- name: Clone Codeman
+  ansible.builtin.git:
+    repo: https://github.com/Ark0N/Codeman.git
+    dest: "{{ lookup('env', 'HOME') }}/Projects/codeman"
+    update: false
+
+- name: Install Codeman dependencies
+  ansible.builtin.shell: |
+    export NVM_DIR="$HOME/.nvm"
+    [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && . "/opt/homebrew/opt/nvm/nvm.sh"
+    cd "$HOME/Projects/codeman" && npm install
+  args:
+    executable: /bin/bash
+    creates: "{{ lookup('env', 'HOME') }}/Projects/codeman/node_modules"
+
+- name: Build Codeman
+  ansible.builtin.shell: |
+    export NVM_DIR="$HOME/.nvm"
+    [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && . "/opt/homebrew/opt/nvm/nvm.sh"
+    cd "$HOME/Projects/codeman" && npm run build
+  args:
+    executable: /bin/bash
+    creates: "{{ lookup('env', 'HOME') }}/Projects/codeman/dist/index.js"
+
+- name: Copy Codeman launchd service
+  ansible.builtin.copy:
+    src: "../files/codeman/com.codeman.web.plist"
+    dest: "{{ lookup('env', 'HOME') }}/Library/LaunchAgents/com.codeman.web.plist"
+    mode: '0644'
+
+- name: Load Codeman launchd service
+  ansible.builtin.shell: |
+    launchctl print "gui/$(id -u)/com.codeman.web" >/dev/null 2>&1 || \
+      launchctl bootstrap "gui/$(id -u)" "$HOME/Library/LaunchAgents/com.codeman.web.plist"
+  args:
+    executable: /bin/bash
