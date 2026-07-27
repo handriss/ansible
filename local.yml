@@ -38,6 +38,10 @@
       ansible.builtin.import_tasks:
         file: tasks/yabai.yml
 
+    - name: Setup Karabiner
+      ansible.builtin.import_tasks:
+        file: tasks/karabiner.yml
+
     - name: Setup nvm and Node.js
       ansible.builtin.import_tasks:
         file: tasks/nvm.yml
@@ -58,15 +62,47 @@
       ansible.builtin.import_tasks:
         file: tasks/neovim.yml
 
-    - name: Setup Docker
-      ansible.builtin.import_tasks:
-        file: tasks/docker.yml
-
     - name: Setup dev tools
       ansible.builtin.import_tasks:
         file: tasks/devtools.yml
 
+    - name: Setup CLI tools
+      ansible.builtin.import_tasks:
+        file: tasks/cli-tools.yml
+
+    - name: Setup cloud and k8s tools
+      ansible.builtin.import_tasks:
+        file: tasks/cloud-k8s.yml
+
+    - name: Setup local AI tools
+      ansible.builtin.import_tasks:
+        file: tasks/ai-tools.yml
+
+    - name: Setup Claude Code config
+      ansible.builtin.import_tasks:
+        file: tasks/claude.yml
+
+    - name: Setup Docker
+      ansible.builtin.import_tasks:
+        file: tasks/docker.yml
+
     - name: Install apps
       ansible.builtin.import_tasks:
         file: tasks/apps.yml
+
+    - name: Install App Store apps
+      ansible.builtin.import_tasks:
+        file: tasks/mas.yml
+
+    - name: Setup custom LaunchAgents
+      ansible.builtin.import_tasks:
+        file: tasks/launchagents.yml
+
+    - name: Setup macOS defaults
+      ansible.builtin.import_tasks:
+        file: tasks/macos.yml
+
+    - name: Setup Codeman
+      ansible.builtin.import_tasks:
+        file: tasks/codeman.yml
 

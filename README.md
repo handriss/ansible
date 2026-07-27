@@ -47,6 +47,24 @@ ansible-playbook local.yml --ask-vault-pass
 - DataGrip
 - PyCharm
 - Google Chrome
+- Tailscale, UTM, mitmproxy, IINA, Handy, OpenMTP, android-platform-tools
+- Claude Desktop, Wispr Flow, Anki (adopted into Homebrew)
+- Karabiner-Elements (+ config)
+- App Store apps via mas (Xcode, Telegram, TestFlight, iWork, GarageBand, iMovie)
+
+### Agents & Automation
+- Codeman (mission control for Claude Code) + launchd service on port 3300
+- Custom LaunchAgents: speechlab micwatcher/sync, caps-lock→escape remap
+- Claude Code global config (CLAUDE.md, settings.json)
+
+## Manual Installs (not tracked)
+
+- **Hiddify** — no Homebrew cask; install from https://github.com/hiddify/hiddify-app
+- **a client product** — own build
+- **Mosyle MDM** — managed externally
+
+Orphaned brew leaves deliberately not tracked: automake, bison, gdbm,
+libffi, libmtp, librsvg, python@3.13 (pyenv covers Python).
 
 ## Project Structure
 
@@ -70,6 +88,7 @@ ansible-playbook local.yml --ask-vault-pass
     ├── terminal.yml
     ├── git.yml
     ├── yabai.yml
+    ├── karabiner.yml
     ├── nvm.yml
     ├── python.yml
     ├── go.yml
@@ -77,7 +96,15 @@ ansible-playbook local.yml --ask-vault-pass
     ├── neovim.yml
     ├── docker.yml
     ├── devtools.yml
-    └── apps.yml
+    ├── cli-tools.yml
+    ├── cloud-k8s.yml
+    ├── ai-tools.yml
+    ├── claude.yml
+    ├── apps.yml
+    ├── mas.yml
+    ├── launchagents.yml
+    ├── macos.yml
+    └── codeman.yml
 ```
 
 ## Vault-Encrypted Files
