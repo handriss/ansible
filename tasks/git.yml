@@ -8,3 +8,9 @@
     src: "../files/.gitconfig"
     dest: "{{ lookup('env', 'HOME') }}/.gitconfig"
     mode: '0644'
+
+- name: Copy .gitignore_global
+  ansible.builtin.copy:
+    src: "../files/.gitignore_global"
+    dest: "{{ lookup('env', 'HOME') }}/.gitignore_global"
+    mode: '0644'

@@ -33,5 +33,5 @@
 
 - name: Install Google Cloud SDK
   community.general.homebrew_cask:
-    name: google-cloud-sdk
+    name: gcloud-cli
     state: present
