@@ -1,8 +1,20 @@
+# Apply direnv's environment for the starting directory BEFORE the instant
+# prompt preamble, with output silenced. direnv >= 2.37 ignores
+# DIRENV_LOG_FORMAT="", so the old env-var trick no longer works.
+if (( $+commands[direnv] )); then
+  emulate zsh -c "$(direnv export zsh 2>/dev/null)"
+fi
+
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
+# direnv hook for directory-bound environment variables (AWS profiles, etc.)
+if (( $+commands[direnv] )); then
+  emulate zsh -c "$(direnv hook zsh)"
 fi
 
 export PATH=/opt/homebrew/bin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin
@@ -26,7 +38,7 @@ alias py=“python3”
 export PATH="/opt/homebrew/sbin:$PATH"
 source /opt/homebrew/opt/chruby/share/chruby/chruby.sh
 source /opt/homebrew/opt/chruby/share/chruby/auto.sh
-chruby ruby-3.3.0
+chruby ruby-3.3
 source /opt/homebrew/share/powerlevel10k/powerlevel10k.zsh-theme
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
@@ -51,3 +63,16 @@ export PATH=$PATH:$HOME/go/bin
 
 # Added by CodeRabbit CLI installer
 export PATH="{{ ansible_env.HOME }}/.local/bin:$PATH"
+
+# Added by CodeRabbit CLI installer
+export PATH="{{ ansible_env.HOME }}/.local/bin:$PATH"
+export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
+export GOPRIVATE=github.com/your-org/*
+
+# Claude Code with mitmproxy capture
+alias claude-capture='NODE_EXTRA_CA_CERTS=~/.mitmproxy/mitmproxy-ca-cert.pem HTTPS_PROXY=http://127.0.0.1:8080 claude'
+
+# Added by LM Studio CLI (lms)
+export PATH="$PATH:{{ ansible_env.HOME }}/.lmstudio/bin"
+# End of LM Studio CLI section
+

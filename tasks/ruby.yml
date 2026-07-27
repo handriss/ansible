@@ -13,9 +13,3 @@
     ruby-install --no-reinstall ruby 3.3
   args:
     executable: /bin/bash
-
-- name: Set Ruby 3.3 as default in .zshrc
-  ansible.builtin.lineinfile:
-    path: "{{ lookup('env', 'HOME') }}/.zshrc"
-    line: "chruby ruby-3.3"
-    state: present
