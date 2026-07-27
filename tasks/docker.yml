@@ -1,4 +1,7 @@
+# Cask renamed from "docker" to "docker-desktop"; the old name purges the app
+# on version mismatch instead of adopting it. Install needs sudo once (helper
+# daemons), so run the playbook interactively the first time.
 - name: Install Docker
   community.general.homebrew_cask:
-    name: docker
+    name: docker-desktop
     state: present

@@ -17,3 +17,21 @@
   community.general.homebrew_cask:
     name: google-chrome
     state: present
+
+- name: Install utility apps
+  community.general.homebrew_cask:
+    name:
+      - tailscale-app
+      - utm
+      - mitmproxy
+      - iina
+      - handy
+      - openmtp
+      - android-platform-tools
+      - claude
+      - wispr-flow
+      - anki
+    state: present
+
+# Hiddify has no Homebrew cask — installed manually from
+# https://github.com/hiddify/hiddify-app (see README).
