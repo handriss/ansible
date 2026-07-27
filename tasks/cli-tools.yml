@@ -1,0 +1,23 @@
+- name: Install CLI tools
+  community.general.homebrew:
+    name:
+      - direnv
+      - gh
+      - git-filter-repo
+      - mas
+      - nmap
+      - pngquant
+      - poppler
+      - pinentry-mac
+      - mist-cli
+      - libpq
+    state: present
+
+- name: Tap cirruslabs/cli
+  community.general.homebrew_tap:
+    name: cirruslabs/cli
+
+- name: Install tart
+  community.general.homebrew:
+    name: cirruslabs/cli/tart
+    state: present

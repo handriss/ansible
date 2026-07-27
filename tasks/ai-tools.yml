@@ -1,0 +1,7 @@
+- name: Install local AI tools
+  community.general.homebrew:
+    name:
+      - llama.cpp
+      - whisper-cpp
+      - hf
+    state: present

@@ -1,0 +1,7 @@
+- name: Install cloud and Kubernetes tools
+  community.general.homebrew:
+    name:
+      - flyctl
+      - helm
+      - minikube
+    state: present
