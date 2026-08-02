@@ -27,7 +27,9 @@ brew "virtualenv"
 # Tools from trusted third-party taps
 brew "hashicorp/tap/terraform"
 brew "koekeishiya/formulae/skhd"
-brew "koekeishiya/formulae/yabai"
+# yabai is installed from the asmvik fork via tasks/yabai.yml (current build,
+# 7.1.25); do not also install koekeishiya/formulae/yabai — same formula from
+# two taps collides.
 
 # Apps and fonts
 # `args: { adopt: true }` makes brew claim an existing manual install at the
