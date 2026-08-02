@@ -115,6 +115,37 @@
                         ]
                     },
                     {
+                        "description": "Left Option: hold alone → Handy push-to-talk (F18); still acts as ⌥ in chords",
+                        "manipulators": [
+                            {
+                                "from": {
+                                    "key_code": "left_option",
+                                    "modifiers": {
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
+                                },
+                                "parameters": {
+                                    "basic.to_if_alone_timeout_milliseconds": 200,
+                                    "basic.to_if_held_down_threshold_milliseconds": 200
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "left_option",
+                                        "lazy": true
+                                    }
+                                ],
+                                "to_if_held_down": [
+                                    {
+                                        "key_code": "f18"
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
                         "description": "Caps Lock: tap = Caps Lock; hold 2s = valto Focus Mode Toggle",
                         "manipulators": [
                             {
