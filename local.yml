@@ -25,84 +25,145 @@
     - name: Install ssh keys
       ansible.builtin.import_tasks:
         file: tasks/ssh.yml
+      tags: [ssh]
+
+    - name: Install everything from Brewfile
+      ansible.builtin.import_tasks:
+        file: tasks/brewfile.yml
+      tags: [brew]
+
+    - name: Apply macOS system defaults
+      ansible.builtin.import_tasks:
+        file: tasks/macos.yml
+      tags: [defaults, macos]
 
     - name: Setup terminal and shell
       ansible.builtin.import_tasks:
         file: tasks/terminal.yml
+      tags: [config, terminal]
 
     - name: Setup git
       ansible.builtin.import_tasks:
         file: tasks/git.yml
+      tags: [config, git]
 
     - name: Setup yabai and skhd
       ansible.builtin.import_tasks:
         file: tasks/yabai.yml
+      tags: [config, services, yabai]
 
-    - name: Setup Karabiner
+    - name: Setup Karabiner-Elements
       ansible.builtin.import_tasks:
         file: tasks/karabiner.yml
-
-    - name: Setup nvm and Node.js
-      ansible.builtin.import_tasks:
-        file: tasks/nvm.yml
-
-    - name: Setup pyenv and Python
-      ansible.builtin.import_tasks:
-        file: tasks/python.yml
-
-    - name: Setup Go
-      ansible.builtin.import_tasks:
-        file: tasks/go.yml
-
-    - name: Setup Ruby
-      ansible.builtin.import_tasks:
-        file: tasks/ruby.yml
+      tags: [config, karabiner]
 
     - name: Setup neovim
       ansible.builtin.import_tasks:
         file: tasks/neovim.yml
+      tags: [config, neovim]
+
+    - name: Setup tmux
+      ansible.builtin.import_tasks:
+        file: tasks/tmux.yml
+      tags: [config, tmux]
+
+    - name: Setup nvm and Node.js versions
+      ansible.builtin.import_tasks:
+        file: tasks/nvm.yml
+      tags: [langs, nvm, node]
+
+    - name: Setup pyenv and Python versions
+      ansible.builtin.import_tasks:
+        file: tasks/python.yml
+      tags: [langs, python, pyenv]
+
+    - name: Setup Go workspace
+      ansible.builtin.import_tasks:
+        file: tasks/go.yml
+      tags: [langs, go]
+
+    - name: Setup Ruby
+      ansible.builtin.import_tasks:
+        file: tasks/ruby.yml
+      tags: [langs, ruby]
+
+    - name: Setup CodeRabbit CLI
+      ansible.builtin.import_tasks:
+        file: tasks/coderabbit.yml
+      tags: [coderabbit]
 
     - name: Setup dev tools
       ansible.builtin.import_tasks:
         file: tasks/devtools.yml
+      tags: [devtools]
 
     - name: Setup CLI tools
       ansible.builtin.import_tasks:
         file: tasks/cli-tools.yml
+      tags: [cli-tools]
 
     - name: Setup cloud and k8s tools
       ansible.builtin.import_tasks:
         file: tasks/cloud-k8s.yml
+      tags: [cloud-k8s]
 
     - name: Setup local AI tools
       ansible.builtin.import_tasks:
         file: tasks/ai-tools.yml
+      tags: [ai-tools]
 
     - name: Setup Claude Code config
       ansible.builtin.import_tasks:
         file: tasks/claude.yml
+      tags: [claude]
 
     - name: Setup Docker
       ansible.builtin.import_tasks:
         file: tasks/docker.yml
+      tags: [docker]
 
     - name: Install apps
       ansible.builtin.import_tasks:
         file: tasks/apps.yml
+      tags: [apps]
 
     - name: Install App Store apps
       ansible.builtin.import_tasks:
         file: tasks/mas.yml
+      tags: [mas]
 
     - name: Setup custom LaunchAgents
       ansible.builtin.import_tasks:
         file: tasks/launchagents.yml
-
-    - name: Setup macOS defaults
-      ansible.builtin.import_tasks:
-        file: tasks/macos.yml
+      tags: [launchagents]
 
     - name: Setup Codeman
       ansible.builtin.import_tasks:
         file: tasks/codeman.yml
+      tags: [codeman]
 
+  post_tasks:
+    - name: Manual installation reminder
+      ansible.builtin.debug:
+        msg:
+          - "============================================================"
+          - ""
+          - "  Playbook finished. A few things must be installed manually:"
+          - ""
+          - "  1. Xcode  -  open the App Store and search 'Xcode',"
+          - "               or use this direct link:"
+          - "               https://apps.apple.com/app/xcode/id497799835"
+          - ""
+          - "     After install, accept the license and install CLT:"
+          - "       sudo xcodebuild -license accept"
+          - "       xcode-select --install"
+          - ""
+          - "  2. Sign in to apps that need accounts:"
+          - "     Tailscale, Claude, Telegram, Anki, Karabiner"
+          - ""
+          - "  3. Grant Accessibility + Input Monitoring permissions to"
+          - "     yabai, skhd, and Karabiner-Elements when macOS prompts"
+          - "     (System Settings -> Privacy & Security)"
+          - ""
+          - "============================================================"
+      tags: [always]

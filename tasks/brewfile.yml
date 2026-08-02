@@ -1,0 +1,19 @@
+- name: Tap third-party formula taps
+  community.general.homebrew_tap:
+    name: "{{ item }}"
+    state: present
+  loop:
+    - koekeishiya/formulae
+    - hashicorp/tap
+
+- name: Trust third-party taps (required when HOMEBREW_REQUIRE_TAP_TRUST is set)
+  ansible.builtin.command: "brew trust {{ item }}"
+  loop:
+    - koekeishiya/formulae
+    - hashicorp/tap
+  changed_when: false
+
+- name: Install everything from Brewfile
+  ansible.builtin.command: "brew bundle install --file={{ playbook_dir }}/Brewfile"
+  register: brew_bundle
+  changed_when: "'Installing' in brew_bundle.stdout"

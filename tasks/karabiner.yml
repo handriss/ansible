@@ -6,13 +6,13 @@
 - name: Ensure .config/karabiner directory exists
   ansible.builtin.file:
     dest: "{{ lookup('env', 'HOME') }}/.config/karabiner"
-    mode: '0700'
+    mode: '0755'
     state: directory
 
 # Note: the caps-lock-to-escape remap is done via hidutil (see
 # launchagents.yml), not Karabiner — both are intentionally present.
 - name: Copy karabiner.json
   ansible.builtin.copy:
-    src: "../files/karabiner/karabiner.json"
+    src: "../files/karabiner.json"
     dest: "{{ lookup('env', 'HOME') }}/.config/karabiner/karabiner.json"
-    mode: '0600'
+    mode: '0644'
