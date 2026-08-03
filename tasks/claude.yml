@@ -17,3 +17,9 @@
     src: "../files/claude/settings.json"
     dest: "{{ lookup('env', 'HOME') }}/.claude/settings.json"
     mode: '0644'
+
+- name: Copy Claude Code status line script
+  ansible.builtin.copy:
+    src: "../files/claude/status-usage.sh"
+    dest: "{{ lookup('env', 'HOME') }}/.claude/status-usage.sh"
+    mode: '0755'

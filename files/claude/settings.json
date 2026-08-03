@@ -7,5 +7,9 @@
   "skipDangerousModePermissionPrompt": true,
   "remoteControlAtStartup": false,
   "agentPushNotifEnabled": true,
-  "voiceEnabled": true
+  "voiceEnabled": true,
+  "statusLine": {
+    "type": "command",
+    "command": "{{ ansible_env.HOME }}/.claude/status-usage.sh"
+  }
 }
