@@ -1,5 +1,5 @@
 {
-  "model": "claude-fable-5",
+  "model": "opus[1m]",
   "enabledPlugins": {
     "swift-lsp@claude-plugins-official": true
   },
@@ -10,6 +10,6 @@
   "voiceEnabled": true,
   "statusLine": {
     "type": "command",
-    "command": "{{ ansible_env.HOME }}/.claude/status-usage.sh"
+    "command": "$HOME/.claude/status-usage.sh"
   }
 }
