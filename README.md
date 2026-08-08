@@ -1,6 +1,24 @@
 # macOS Setup with Ansible
 
-Automated setup for a new macOS machine using Ansible.
+Automated setup for a new macOS machine using Ansible. It installs a specific,
+opinionated toolchain and replaces several dotfiles with mine.
+
+> **Read this before running it on a machine you care about.**
+>
+> This is my personal setup, published because it may be useful to read or fork —
+> not as a general-purpose installer. Running it will:
+>
+> - **overwrite** `~/.zshrc`, `~/.p10k.zsh`, `~/.gitignore_global`, and the
+>   `nvim` / `tmux` / `yabai` / `skhd` / `karabiner` configs under `~/.config`
+>   (each is backed up alongside the original first)
+> - install ~60 Homebrew packages and casks, and `brew trust` third-party taps
+> - restart Dock, Finder and SystemUIServer to apply macOS defaults
+> - install [Codeman](https://github.com/Ark0N/Codeman) as a launchd service on port 3300
+> - amend `/etc/pam.d/sudo_local` to enable Touch ID for `sudo` (during bootstrap)
+>
+> It ships **no credentials**: it generates an SSH key rather than copying one,
+> leaves `~/.aws` for you to configure, and only writes `.gitconfig` if you supply
+> your own identity vars. Fork it and cut what you don't want.
 
 ## Quick Start
 
@@ -11,7 +29,7 @@ curl -fsSL https://raw.githubusercontent.com/handriss/ansible/main/bootstrap.sh 
 ## Run Playbook
 
 ```bash
-ansible-playbook local.yml --ask-vault-pass
+ansible-playbook local.yml
 ```
 
 ## What Gets Installed
@@ -107,22 +125,19 @@ libffi, libmtp, librsvg, python@3.13 (pyenv covers Python).
     └── codeman.yml
 ```
 
-## Vault-Encrypted Files
+## Secrets
 
-Sensitive files are encrypted with Ansible Vault:
-- `.ssh/id_rsa` - SSH private key
-- `.aws/credentials` - AWS credentials
+This playbook ships **no** credentials. It generates an Ed25519 SSH key if you
+don't have one, leaves `~/.aws` empty for you to configure with `aws configure
+sso`, and renders `.gitconfig` from your own variables (see `vars/example.yml`).
 
-To edit encrypted files:
-```bash
-ansible-vault edit .ssh/id_rsa
-```
+Nothing here needs Ansible Vault.
 
 ## Dry Run
 
 Preview changes without applying:
 ```bash
-ansible-playbook local.yml --check --ask-vault-pass
+ansible-playbook local.yml --check
 ```
 
 ## Requirements

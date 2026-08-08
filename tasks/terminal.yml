@@ -3,9 +3,11 @@
     src: "../files/.zshrc"
     dest: "{{ lookup('env', 'HOME') }}/.zshrc"
     mode: '0644'
+    backup: true
 
 - name: Copy .p10k.zsh
   ansible.builtin.copy:
     src: "../files/.p10k.zsh"
     dest: "{{ lookup('env', 'HOME') }}/.p10k.zsh"
     mode: '0644'
+    backup: true

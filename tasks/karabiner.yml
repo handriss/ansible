@@ -16,3 +16,4 @@
     src: "../files/karabiner.json"
     dest: "{{ lookup('env', 'HOME') }}/.config/karabiner/karabiner.json"
     mode: '0644'
+    backup: true

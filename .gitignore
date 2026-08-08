@@ -1,3 +1,13 @@
 .idea
 .DS_Store
 *.retry
+
+vars/local.yml
+.ssh/
+.aws/
+*.pem
+*.key
+.env*
+files/aws/
+files/.gitconfig
+files/launchagents/com.andras.*

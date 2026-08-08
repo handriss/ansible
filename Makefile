@@ -24,27 +24,27 @@ bootstrap:
 	./bootstrap.sh
 
 install:
-	ansible-playbook local.yml --ask-vault-pass
+	ansible-playbook local.yml
 
 check:
-	ansible-playbook local.yml --ask-vault-pass --check
+	ansible-playbook local.yml --check
 
 update:
 	brew update && brew upgrade
-	ansible-playbook local.yml --ask-vault-pass
+	ansible-playbook local.yml
 
 doctor:
 	@./scripts/doctor.sh
 
 brew:
-	ansible-playbook local.yml --ask-vault-pass --tags=brew
+	ansible-playbook local.yml --tags=brew
 
 config:
-	ansible-playbook local.yml --ask-vault-pass --tags=config
+	ansible-playbook local.yml --tags=config
 
 defaults:
-	ansible-playbook local.yml --ask-vault-pass --tags=defaults
+	ansible-playbook local.yml --tags=defaults
 
 # Pass through arbitrary tags: make tags TAGS=yabai,karabiner
 tags:
-	ansible-playbook local.yml --ask-vault-pass --tags="$(TAGS)"
+	ansible-playbook local.yml --tags="$(TAGS)"

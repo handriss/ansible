@@ -32,6 +32,7 @@
     src: "../files/codeman/com.codeman.web.plist"
     dest: "{{ lookup('env', 'HOME') }}/Library/LaunchAgents/com.codeman.web.plist"
     mode: '0644'
+    backup: true
 
 - name: Load Codeman launchd service
   ansible.builtin.shell: |

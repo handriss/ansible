@@ -1,11 +1,23 @@
-- name: Copy .gitconfig
-  ansible.builtin.copy:
-    src: "../files/.gitconfig"
+# Identity comes from vars, not from a committed dotfile — see vars/example.yml.
+# Run with:  ansible-playbook local.yml -e @vars/local.yml
+- name: Render .gitconfig from your identity vars
+  ansible.builtin.template:
+    src: "../templates/gitconfig.j2"
     dest: "{{ lookup('env', 'HOME') }}/.gitconfig"
     mode: '0644'
+    backup: true
+  when: git_user_name is defined and git_user_email is defined
+
+- name: Warn when git identity vars are missing
+  ansible.builtin.debug:
+    msg: >-
+      Skipping .gitconfig — set git_user_name and git_user_email
+      (copy vars/example.yml to vars/local.yml and pass -e @vars/local.yml).
+  when: git_user_name is not defined or git_user_email is not defined
 
 - name: Copy .gitignore_global
   ansible.builtin.copy:
     src: "../files/.gitignore_global"
     dest: "{{ lookup('env', 'HOME') }}/.gitignore_global"
     mode: '0644'
+    backup: true

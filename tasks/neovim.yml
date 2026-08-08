@@ -9,3 +9,4 @@
     src: "../files/nvim/init.lua"
     dest: "{{ lookup('env', 'HOME') }}/.config/nvim/init.lua"
     mode: '0644'
+    backup: true

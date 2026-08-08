@@ -51,4 +51,4 @@ else
 fi
 
 echo "Prerequisites installed successfully!"
-echo "Run the playbook with: ansible-playbook local.yml --ask-vault-pass"
+echo "Run the playbook with: ansible-playbook local.yml"

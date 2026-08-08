@@ -1,37 +1,15 @@
-# Custom user LaunchAgents. The speechlab agents depend on ~/Projects/speechlab
-# existing on the machine; they are skipped (not failed) when it is absent.
-
-- name: Check if speechlab project exists
-  ansible.builtin.stat:
-    path: "{{ lookup('env', 'HOME') }}/Projects/speechlab"
-  register: speechlab_dir
-
-- name: Copy speechlab LaunchAgents
-  ansible.builtin.copy:
-    src: "../files/launchagents/{{ item }}"
-    dest: "{{ lookup('env', 'HOME') }}/Library/LaunchAgents/{{ item }}"
-    mode: '0644'
-  loop:
-    - com.andras.micwatcher.plist
-    - com.andras.speechsync.plist
-  when: speechlab_dir.stat.exists
-
-- name: Load speechlab LaunchAgents
-  ansible.builtin.shell: |
-    launchctl print "gui/$(id -u)/{{ item }}" >/dev/null 2>&1 || \
-      launchctl bootstrap "gui/$(id -u)" "$HOME/Library/LaunchAgents/{{ item }}.plist"
-  args:
-    executable: /bin/bash
-  loop:
-    - com.andras.micwatcher
-    - com.andras.speechsync
-  when: speechlab_dir.stat.exists
+# Custom user LaunchAgents.
+#
+# Personal agents (e.g. the speechlab mic/sync pair) are intentionally not
+# shipped here — they reference private projects. Drop your own plists into
+# files/launchagents/ and add them below.
 
 - name: Copy caps-lock-to-escape LaunchAgent
   ansible.builtin.copy:
     src: "../files/launchagents/com.local.caps-lock-to-escape.plist"
     dest: "{{ lookup('env', 'HOME') }}/Library/LaunchAgents/com.local.caps-lock-to-escape.plist"
     mode: '0644'
+    backup: true
 
 - name: Load caps-lock-to-escape LaunchAgent
   ansible.builtin.shell: |

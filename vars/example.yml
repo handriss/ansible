@@ -1,0 +1,14 @@
+# Copy to vars/local.yml, fill in, then:
+#   ansible-playbook local.yml -e @vars/local.yml --ask-vault-pass
+#
+# vars/local.yml is gitignored — never commit it.
+
+git_user_name: "Your Name"
+git_user_email: "you@example.com"
+
+# Optional. Omit or leave empty to skip GPG commit signing entirely.
+git_signing_key: ""
+
+git_editor: "vim"
+git_default_branch: "main"
+git_pull_rebase: "true"

@@ -19,17 +19,15 @@
     mode: '0700'
     state: directory
 
-- name: Copy AWS config
-  ansible.builtin.copy:
-    src: "../files/aws/config"
-    dest: "{{ lookup('env', 'HOME') }}/.aws/config"
-    mode: '0600'
-
-- name: Copy AWS credentials
-  ansible.builtin.copy:
-    src: "../.aws/credentials"
-    dest: "{{ lookup('env', 'HOME') }}/.aws/credentials"
-    mode: '0600'
+# AWS profiles are personal and often contain client infrastructure, so this
+# playbook deliberately ships none. Configure your own after the run:
+#   aws configure sso            (recommended — no long-lived keys on disk)
+#   aws configure --profile foo  (static keys, if you must)
+- name: Note that AWS profiles are not managed here
+  ansible.builtin.debug:
+    msg: >-
+      ~/.aws is created but left empty. Run `aws configure sso` to set up a
+      profile; this playbook intentionally does not ship credentials.
 
 - name: Install Google Cloud SDK
   community.general.homebrew_cask:
