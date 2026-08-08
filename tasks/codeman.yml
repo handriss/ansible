@@ -27,9 +27,9 @@
     executable: /bin/bash
     creates: "{{ lookup('env', 'HOME') }}/Projects/codeman/dist/index.js"
 
-- name: Copy Codeman launchd service
-  ansible.builtin.copy:
-    src: "../files/codeman/com.codeman.web.plist"
+- name: Render Codeman launchd service
+  ansible.builtin.template:
+    src: "../templates/com.codeman.web.plist.j2"
     dest: "{{ lookup('env', 'HOME') }}/Library/LaunchAgents/com.codeman.web.plist"
     mode: '0644'
     backup: true

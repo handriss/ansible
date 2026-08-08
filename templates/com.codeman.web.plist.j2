@@ -8,7 +8,7 @@
 
   <key>ProgramArguments</key>
   <array>
-    <string>{{ ansible_env.HOME }}/.nvm/versions/node/v22.21.1/bin/node</string>
+    <string>{{ ansible_env.HOME }}/.nvm/versions/node/v{{ codeman_node_version | default("22.21.1") }}/bin/node</string>
     <string>{{ ansible_env.HOME }}/Projects/codeman/dist/index.js</string>
     <string>web</string>
     <string>--port</string>
@@ -22,7 +22,7 @@
   <key>EnvironmentVariables</key>
   <dict>
     <key>PATH</key>
-    <string>/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:{{ ansible_env.HOME }}/.nvm/versions/node/v22.21.1/bin</string>
+    <string>/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:{{ ansible_env.HOME }}/.nvm/versions/node/v{{ codeman_node_version | default("22.21.1") }}/bin</string>
   </dict>
 
   <key>StandardOutPath</key>

@@ -31,10 +31,9 @@ export JAVA_HOME=/Library/Java/JavaVirtualMachines/zulu-17.jdk/Contents/Home/
 
 export GEM_HOME="$HOME/.gem"
 
-export PATH="/opt/homebrew/bin/python3:${PATH}"
-alias python=“python3”
-alias 3=“python3”
-alias py=“python3”
+alias python="python3"
+alias 3="python3"
+alias py="python3"
 export PATH="/opt/homebrew/sbin:$PATH"
 source /opt/homebrew/opt/chruby/share/chruby/chruby.sh
 source /opt/homebrew/opt/chruby/share/chruby/auto.sh
@@ -46,26 +45,26 @@ source /opt/homebrew/share/powerlevel10k/powerlevel10k.zsh-theme
 
 # tabtab source for electron-forge package
 # uninstall by removing these lines or running `tabtab uninstall electron-forge`
-[[ -f {{ ansible_env.HOME }}/.npm/_npx/6913fdfd1ea7a741/node_modules/tabtab/.completions/electron-forge.zsh ]] && . {{ ansible_env.HOME }}/.npm/_npx/6913fdfd1ea7a741/node_modules/tabtab/.completions/electron-forge.zsh
+[[ -f $HOME/.npm/_npx/6913fdfd1ea7a741/node_modules/tabtab/.completions/electron-forge.zsh ]] && . $HOME/.npm/_npx/6913fdfd1ea7a741/node_modules/tabtab/.completions/electron-forge.zsh
 # bun completions
-[ -s "{{ ansible_env.HOME }}/.bun/_bun" ] && source "{{ ansible_env.HOME }}/.bun/_bun"
+[ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
 
 # bun
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
 
 # Added by LM Studio CLI (lms)
-export PATH="$PATH:{{ ansible_env.HOME }}/.lmstudio/bin"
+export PATH="$PATH:$HOME/.lmstudio/bin"
 
 # Added by Windsurf
-export PATH="{{ ansible_env.HOME }}/.codeium/windsurf/bin:$PATH"
+export PATH="$HOME/.codeium/windsurf/bin:$PATH"
 export PATH=$PATH:$HOME/go/bin
 
 # Added by CodeRabbit CLI installer
-export PATH="{{ ansible_env.HOME }}/.local/bin:$PATH"
+export PATH="$HOME/.local/bin:$PATH"
 
 # Added by CodeRabbit CLI installer
-export PATH="{{ ansible_env.HOME }}/.local/bin:$PATH"
+export PATH="$HOME/.local/bin:$PATH"
 export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
 export GOPRIVATE=github.com/your-org/*
 
@@ -73,6 +72,6 @@ export GOPRIVATE=github.com/your-org/*
 alias claude-capture='NODE_EXTRA_CA_CERTS=~/.mitmproxy/mitmproxy-ca-cert.pem HTTPS_PROXY=http://127.0.0.1:8080 claude'
 
 # Added by LM Studio CLI (lms)
-export PATH="$PATH:{{ ansible_env.HOME }}/.lmstudio/bin"
+export PATH="$PATH:$HOME/.lmstudio/bin"
 # End of LM Studio CLI section
 

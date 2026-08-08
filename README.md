@@ -46,7 +46,7 @@ ansible-playbook local.yml
 - Claude Code
 
 ### Programming Languages
-- Node.js (18, 20, 22 LTS via nvm)
+- Node.js 22 and 24 via nvm (24 is the default)
 - Python (3.12, 3.13 via pyenv)
 - Go
 - Ruby (3.3 via chruby)
@@ -72,13 +72,12 @@ ansible-playbook local.yml
 
 ### Agents & Automation
 - Codeman (mission control for Claude Code) + launchd service on port 3300
-- Custom LaunchAgents: speechlab micwatcher/sync, caps-lock→escape remap
+- Custom LaunchAgent: caps-lock→escape remap
 - Claude Code global config (CLAUDE.md, settings.json)
 
 ## Manual Installs (not tracked)
 
 - **Hiddify** — no Homebrew cask; install from https://github.com/hiddify/hiddify-app
-- **a client product** — own build
 - **Mosyle MDM** — managed externally
 
 Orphaned brew leaves deliberately not tracked: automake, bison, gdbm,
@@ -92,37 +91,13 @@ libffi, libmtp, librsvg, python@3.13 (pyenv covers Python).
 ├── inventory           # Ansible inventory
 ├── ansible.cfg         # Ansible configuration
 ├── bootstrap.sh        # Prerequisites installer
-├── files/              # Config files (non-sensitive)
-│   ├── .zshrc
-│   ├── .p10k.zsh
-│   ├── .gitconfig
-│   ├── yabairc
-│   ├── skhdrc
-│   └── aws/
-├── .ssh/               # SSH keys (vault-encrypted)
-├── .aws/               # AWS credentials (vault-encrypted)
-└── tasks/
-    ├── ssh.yml
-    ├── terminal.yml
-    ├── git.yml
-    ├── yabai.yml
-    ├── karabiner.yml
-    ├── nvm.yml
-    ├── python.yml
-    ├── go.yml
-    ├── ruby.yml
-    ├── neovim.yml
-    ├── docker.yml
-    ├── devtools.yml
-    ├── cli-tools.yml
-    ├── cloud-k8s.yml
-    ├── ai-tools.yml
-    ├── claude.yml
-    ├── apps.yml
-    ├── mas.yml
-    ├── launchagents.yml
-    ├── macos.yml
-    └── codeman.yml
+├── files/              # Dotfiles copied verbatim (.zshrc, .p10k.zsh, yabairc,
+│                       #   skhdrc, karabiner.json, nvim/, tmux.conf, ...)
+├── templates/          # Rendered with your vars (gitconfig.j2, codeman plist)
+├── vars/               # example.yml -> copy to local.yml and fill in
+├── scripts/
+│   └── doctor.sh       # Read-only drift check: installed vs. tracked
+└── tasks/              # One file per concern, all tagged
 ```
 
 ## Secrets
